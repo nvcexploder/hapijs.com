@@ -14,16 +14,15 @@ The most basic server looks like the following:
 
 ```javascript
 var Hapi = require('hapi');
-var server = new Hapi.Server(3000);
+var server = new Hapi.Server();
+server.connection({ port: 8080 });
 
 server.start(function () {
     console.log('Server running at:', server.info.uri);
 });
 ```
 
-First, we require hapi. Then we create a new hapi server object, passing in a port
-number for the server to listen on. After that, start the server and log that it's
-running.
+First, we require hapi, then create a new server object. After that, we add a connection to that server and give it a port.
 
 When creating the server object, we can also provide a hostname, IP address, or even
 a Unix socket file, or Windows named pipe to bind the server to. For more details, see [the API reference](/api/#hapiserver).
@@ -34,7 +33,8 @@ Now that we have a server we should add one or two routes so that it actually do
 
 ```javascript
 var Hapi = require('hapi');
-var server = new Hapi.Server(3000);
+var server = new Hapi.Server();
+server.connection({ port: 8080 });
 
 server.route({
     method: 'GET',
